@@ -1,3 +1,8 @@
 baseURL = "https://blog.pluser.net/"
-languageCode = "ja-JP"
-title = "Pluser's notebook"
+#languageCode = "ja"
+title = "かすれた*Pluser*の巻物"
+theme = "temple"
+DefaultContentLanguage = "ja"
+
+[params]
+highlight = true
