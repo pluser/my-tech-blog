@@ -1,0 +1,9 @@
+[submodule "themes/lithium"]
+	path = themes/lithium
+	url = https://github.com/jrutheiser/hugo-lithium-theme
+[submodule "themes/paper"]
+	path = themes/paper
+	url = https://github.com/nanxiaobei/hugo-paper
+[submodule "themes/temple"]
+	path = themes/temple
+	url = https://github.com/aos/temple.git
