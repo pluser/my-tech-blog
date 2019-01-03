@@ -1,0 +1,132 @@
+/* General */
+
+a {
+	text-decoration: none;
+}
+
+a:hover {
+	text-decoration: underline;
+	text-decoration-color: orange;
+}
+
+a:link {
+	/*color: powderblue;*/
+	color: cornflowerblue;
+}
+
+a:visited {
+	/*color: steelblue;*/
+	color: darkcyan;
+}
+
+body {
+	background-color: #181a26;
+	color: #D8D8D8;
+	background-image: linear-gradient(-45deg, rgba(0,0,0,.05) 5%, transparent 5%, transparent 50%, rgba(0,0,0,.05) 50%, rgba(0,0,0,.05) 55%, transparent 55%, transparent 100%),
+					  linear-gradient( 45deg, rgba(0,0,0,.05) 5%, transparent 5%, transparent 50%, rgba(0,0,0,.05) 50%, rgba(0,0,0,.05) 55%, transparent 55%, transparent 100%);
+	background-size: 21px 21px;
+}
+
+.post {
+	color: #ccc;
+}
+
+h1 {
+	text-align: center;
+	font-family: 'Inconsolata', monospace;
+}
+
+#blinkCursor {
+	display: inline-block;
+	transform: scale(1, 1.2);
+	color: lime;
+	animation: cblink 1s step-end 10;
+}
+
+@keyframes cblink {
+	50% {
+		opacity:0;
+	}
+}
+
+#titleHolizon {
+	border: none;
+	height: 2px;
+	width: 50%;
+	background: linear-gradient(to right, transparent, steelblue, transparent);
+}
+
+@media (max-width: 800px) {
+	#titleHolizon {
+		width: 80%;
+	}
+}
+
+#footerHolizon {
+	border: 1px solid #383a46;
+	width: 90%;
+}
+
+footer {
+	margin: 0 5%;
+	text-align: right;
+	color: grey;
+}
+
+/* Listing Page */
+
+#articleListWrap {
+	width: 60%;
+	margin: 3em auto;
+}
+
+.articleListItem {
+	/*border: solid 1px;
+	border-color: darkgray;
+	border-style: dashed;*/
+	padding: 1em;
+	margin-top: 2em;
+}
+
+.articleListItem:not(:first-child) {
+	border-top: solid 1px;
+	border-top-color: teal;
+	border-top-style: dashed;
+}
+
+.articleListItem h2 small {
+	font-size: xx-small;
+	margin-left: 1em;
+}
+
+@media (max-width: 800px) {
+	#articleListWrap {
+		width: 90%;
+	}
+}
+
+/* Single Page */
+#articleContainer {
+	margin: 2em auto;
+	width: 60%;
+}
+
+@media (max-width: 800px) {
+	#articleContainer {
+		width: 90%;
+	}
+}
+
+#articleDate {
+	color: #A0A0A0;
+	font-size: small;
+}
+
+#articleTitle {
+	font-size: x-large;
+}
+
+code {
+	tab-size: 2;
+	-moz-tab-size: 2;
+}

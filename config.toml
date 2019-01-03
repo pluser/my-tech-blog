@@ -1,8 +1,8 @@
 baseURL = "https://blog.pluser.net/"
-#languageCode = "ja"
+languageCode = "ja"
 title = "かすれた*Pluser*の巻物"
-theme = "temple"
+theme = "emacsy"
 DefaultContentLanguage = "ja"
-
-[params]
-highlight = true
+hasCJKLanguage = true
+pygmentsUseClasses = true
+pygmentsCodeFences = true

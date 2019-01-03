@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>{{ .Site.Title }}</title>
+		<link href="https://fonts.googleapis.com/css?family=Inconsolata" rel="stylesheet">
+		<link href="{{ .Site.BaseURL }}/css/emacsy.css" rel="stylesheet">
+		<link href="{{ .Site.BaseURL }}/css/syntax_highlight.css" rel="stylesheet">
+	</head>
+	<body>
+		<h1>{{ .Site.Title }}<span id="blinkCursor">&#x25AE;</span></h1>
+		<hr id="titleHolizon">
+		<div id="articleContainer">
+		<header>
+			<span id="articleHeader">
+				<h2>
+					<span id="articleTitle">
+						{{ .Title }}
+					</span>
+					<time id="articleDate" datetime="{{ .Date }}">
+						<small>{{ .Date.Format "2006" }}-{{ .Date.Format "Jan" }}-{{ .Date.Format "02" }}</small>
+					</time>
+				</h2>
+			</span>
+		</header>
+		<article>
+			<div id="contentContainer">{{ .Content }}</div>
+		</article>
+		</div>
+		<hr id="footerHolizon">
+		<footer>
+			<div id="lastupdate">Lastupdate: {{ .Site.LastChange }}</div>
+			<div id="copyright"><small>{{ .Site.Copyright }}</small></div>
+		</footer>
+	</body>
+</html>

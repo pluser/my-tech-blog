@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>{{ .Site.Title }}</title>
+		<link href="https://fonts.googleapis.com/css?family=Inconsolata" rel="stylesheet">
+		<link href="{{ .Site.BaseURL }}/css/emacsy.css" rel="stylesheet">
+	</head>
+	<body>
+		<h1>{{ .Site.Title }}<span id="blinkCursor">&#x25AE;</span></h1>
+		<hr id="titleHolizon">
+		<div id="articleListWrap">
+			{{ range .Data.Pages }}
+			<div class="articleListItem"><article>
+				<header><h2><a href="{{ .RelPermalink }}">{{ .Title }}</a><small>({{ .Date.Format "2006-01-02" }})</small></h2></header>
+				<p>{{ if .Params.summary }}{{ .Params.summary }}{{ else }}{{ .Summary }}{{ end }}</p>
+			</article></div>
+			{{ end }}
+		</div>
+		<hr id="footerHolizon">
+		<footer>
+			<div id="lastupdate">Lastupdate: {{ .Site.LastChange }}</div>
+			<div id="copyright"><small>{{ .Site.Copyright }}</small></div>
+		</footer>
+	</body>
+</html>
