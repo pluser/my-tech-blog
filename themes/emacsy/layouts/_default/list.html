@@ -5,6 +5,9 @@
 		<title>{{ .Site.Title }}</title>
 		<link href="https://fonts.googleapis.com/css?family=Inconsolata" rel="stylesheet">
 		<link href="{{ .Site.BaseURL }}/css/emacsy.css" rel="stylesheet">
+		{{ with .OutputFormats.Get "Atom" -}}
+		{{ printf `<link rel="%s" type="%s" href="%s" title="%s" />` .Rel .MediaType.Type .Permalink $.Site.Title | safeHTML }}
+		{{ end -}}
 	</head>
 	<body>
 		<h1>{{ .Site.Title }}<span id="blinkCursor">&#x25AE;</span></h1>

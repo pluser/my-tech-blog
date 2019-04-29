@@ -6,3 +6,9 @@ DefaultContentLanguage = "ja"
 hasCJKLanguage = true
 pygmentsUseClasses = true
 pygmentsCodeFences = true
+
+
+[outputs]
+home = ["HTML", "Atom"]
+
+disableKinds = ['RSS']

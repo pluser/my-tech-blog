@@ -1,0 +1,8 @@
+[mediaTypes]
+[mediaTypes."application/atom+xml"]
+suffixes = ["xml"]
+
+[outputFormats.Atom]
+mediaType = "application/atom+xml"
+baseName = "feed"
+isPlainText = false
