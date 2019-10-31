@@ -1,5 +1,5 @@
 ---
-title: "Display of iMac Dosen't Response EDID"
+title: "Display of iMac Doesn't Response EDID"
 date: 2019-04-28T03:39:50+09:00
 type: posts
 draft: false
