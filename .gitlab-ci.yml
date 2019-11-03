@@ -1,0 +1,35 @@
+stages:
+  - build
+  - deploy
+
+build:
+  stage: build
+  image: monachus/hugo
+  variables:
+    GIT_SUBMODULE_STRATEGY: recursive
+  script:
+    - hugo
+  artifacts:
+    paths:
+      - public
+  only:
+    - master
+
+deploy:
+  stage: deploy
+#  image: node:latest
+  cache:
+    paths:
+      - node_modules/
+  script:
+#    - npm install -g firebase-tools
+    - firebase use --token ${FIREBASE_TOKEN} scroll-of-pluser
+    - firebase deploy -m "Pipeline ${CI_PIPELINE_ID}, build ${CI_BUILD_ID}" --non-interactive --token ${FIREBASE_TOKEN}
+#    - echo $GCLOUD_SERVICE_KEY | gcloud auth activate-service-account --key-file=-
+#    - gcloud --quiet config set project ${GOOGLE_PROJECT_ID}
+#    - gcloud --quiet config set compute/zone ${GOOGLE_COMPUTE_ZONE}
+  environment:
+    name: production
+    url: https://blog.pluser.net
+  only:
+    - master
