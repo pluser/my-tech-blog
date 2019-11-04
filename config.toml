@@ -4,9 +4,9 @@ title = "かすれた*Pluser*の巻物"
 theme = "emacsy"
 DefaultContentLanguage = "ja"
 hasCJKLanguage = true
-pygmentsStyle = "dracura"
+pygmentsUseClasses = true
 pygmentsCodeFences = true
-pygmentsOptions = "linenos=true"
+pygmentsOptions = "linenos=table"
 
 
 [outputs]
