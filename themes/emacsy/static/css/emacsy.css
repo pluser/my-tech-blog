@@ -126,7 +126,10 @@ footer {
 	font-size: x-large;
 }
 
+@import url('https://fonts.googleapis.com/css?family=Source+Code+Pro&display=swap');
+
 code {
+	font-family: 'Source Code Pro', monospace;
 	tab-size: 2;
 	-moz-tab-size: 2;
 }
