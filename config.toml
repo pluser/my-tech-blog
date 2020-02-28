@@ -1,4 +1,4 @@
-baseURL = "https://blog.pluser.net/"
+baseURL = "https://blog.pluser.net"
 languageCode = "ja"
 title = "かすれた*Pluser*の巻物"
 theme = "emacsy"
