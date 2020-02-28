@@ -75,9 +75,19 @@ footer {
 
 /* Listing Page */
 
+.paginationWrap{
+	margin: 2em 0 0 0;
+	text-align: center;
+}
+
+.paginationWrap li {
+	display: inline;
+	padding: 0 .3em;
+}
+
 #articleListWrap {
 	width: 60%;
-	margin: 3em auto;
+	margin: 0 auto;
 }
 
 .articleListItem {

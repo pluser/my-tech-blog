@@ -12,14 +12,16 @@
 	<body>
 		<h1>{{ .Site.Title }}<span id="blinkCursor">&#x25AE;</span></h1>
 		<hr id="titleHolizon">
+		<div class="paginationWrap">{{ template "_internal/pagination.html" . }}</div>
 		<div id="articleListWrap">
-			{{ range .Site.RegularPages }}
+			{{ range .Paginator.Pages }}
 			<div class="articleListItem"><article>
-				<header><h2><a href="{{ .RelPermalink }}">{{ .Title }}</a><small>({{ .Date.Format "2006-01-02" }})</small></h2></header>
+				<header><h2><a href="{{ .RelPermalink }}">{{ .Title | humanize }}</a><small>({{ .Date.Format "2006-01-02" }})</small></h2></header>
 				<p>{{ if .Params.summary }}{{ .Params.summary }}{{ else }}{{ .Summary }}{{ end }}</p>
 			</article></div>
 			{{ end }}
 		</div>
+		<div class="paginationWrap">{{ template "_internal/pagination.html" . }}</div>
 		<hr id="footerHolizon">
 		<footer>
 			<div id="lastupdate">Lastupdate: {{ .Site.LastChange }}</div>
