@@ -20,7 +20,7 @@
 		<div id="articleListWrap">
 			{{ range .Paginator.Pages }}
 			<div class="articleListItem"><article>
-				<header><h2><a href="{{ .RelPermalink }}">{{ .Title | humanize }}</a><small>({{ .Date.Format "2006-01-02" }})</small></h2></header>
+				<header><h2><a href="{{ .RelPermalink }}">{{ .Title }}</a><small>({{ .Date.Format "2006-01-02" }})</small></h2></header>
 				<p>{{ if .Params.summary }}{{ .Params.summary }}{{ else }}{{ .Summary }}{{ end }}</p>
 			</article></div>
 			{{ end }}
