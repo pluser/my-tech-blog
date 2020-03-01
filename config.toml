@@ -7,7 +7,7 @@ hasCJKLanguage = true
 pygmentsUseClasses = true
 pygmentsCodeFences = true
 pygmentsOptions = "linenos=table"
-
+googleAnalytics = "UA-582650-9"
 
 [outputs]
 home = ["HTML", "Atom"]
