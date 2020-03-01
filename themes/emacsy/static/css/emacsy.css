@@ -36,6 +36,14 @@ h1 {
 	font-family: 'Inconsolata', monospace;
 }
 
+.align-right {
+	text-align: right;
+}
+
+img {
+	max-width: 100%;
+}
+
 #blinkCursor {
 	display: inline-block;
 	transform: scale(1, 1.2);
