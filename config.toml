@@ -1,6 +1,5 @@
 baseURL = "https://blog.pluser.net"
-languageCode = "ja"
-title = "かすれた*Pluser*の巻物"
+#languageCode = "ja"
 theme = "emacsy"
 DefaultContentLanguage = "ja"
 hasCJKLanguage = true
@@ -13,3 +12,9 @@ googleAnalytics = "UA-582650-9"
 home = ["HTML", "Atom"]
 
 disableKinds = ['RSS']
+
+[languages]
+[languages.ja]
+title = "かすれた*Pluser*の巻物"
+[languages.en]
+title = "Faint Scroll of *Pluser*"
