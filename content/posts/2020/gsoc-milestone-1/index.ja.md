@@ -2,7 +2,7 @@
 title: "GSoC マイルストーン 1"
 date: 2020-06-20T18:01:49+09:00
 type: posts
-draft: true
+draft: false
 ---
 
 ### はじめに
