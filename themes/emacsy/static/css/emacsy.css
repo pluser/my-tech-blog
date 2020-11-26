@@ -148,6 +148,12 @@ footer {
 	font-size: x-large;
 }
 
+div.highlight > pre {
+	border: solid;
+	border-width: thin;
+	border-color: darkgreen;
+}
+
 @import url('https://fonts.googleapis.com/css?family=Source+Code+Pro&display=swap');
 
 code {
@@ -155,3 +161,8 @@ code {
 	tab-size: 2;
 	-moz-tab-size: 2;
 }
+
+pre {
+	white-space: pre; /* dont word-wrap */
+	overflow-x: scroll;
+	

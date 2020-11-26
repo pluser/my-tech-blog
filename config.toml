@@ -3,14 +3,17 @@ baseURL = "https://blog.pluser.net"
 theme = "emacsy"
 DefaultContentLanguage = "ja"
 hasCJKLanguage = true
-pygmentsUseClasses = true
-pygmentsCodeFences = true
-pygmentsOptions = "linenos=table"
 googleAnalytics = "UA-582650-9"
+
+[markup]
+[markup.highlight]
+anchorLineNos = true
+codeFences = true
+lineNos = false
+lineNumbersInTable = false
 
 [outputs]
 home = ["HTML", "Atom"]
-
 disableKinds = ['RSS']
 
 [languages]
