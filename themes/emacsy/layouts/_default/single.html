@@ -1,40 +1,64 @@
 <!DOCTYPE html>
 <html lang="{{ .Language.Lang }}">
-	<head>
-		<meta charset="utf-8">
-		<meta name="viewport" content="width=device-width, initial-scale=1">
-		<title>{{ .Site.Title }}</title>
-		<link href="https://fonts.googleapis.com/css?family=Inconsolata" rel="stylesheet">
-		<link href="{{ .Site.BaseURL }}/css/emacsy.css" rel="stylesheet">
-		<link href="{{ .Site.BaseURL }}/css/syntax_highlight.css" rel="stylesheet">
-		{{ template "_internal/opengraph.html" . }}
-		{{ template "_internal/twitter_cards.html" . }}
-		{{ template "_internal/google_analytics_async.html" . }}
-	</head>
-	<body>
-		<h1>{{ .Site.Title }}<span id="blinkCursor">&#x25AE;</span></h1>
-		<hr id="titleHolizon">
-		<div id="articleContainer">
-		<header>
-			<span id="articleHeader">
-				<h2>
-					<span id="articleTitle">
-						{{ .Title }}
-					</span>
-					<time id="articleDate" datetime="{{ .Date }}">
-						<small>{{ .Date.Format "2006" }}-{{ .Date.Format "Jan" }}-{{ .Date.Format "02" }}</small>
-					</time>
-				</h2>
-			</span>
-		</header>
-		<article>
-			<div id="contentContainer">{{ .Content }}</div>
-		</article>
-		</div>
-		<hr id="footerHolizon">
-		<footer>
-			<div id="lastupdate">lastupdate: {{ .Site.LastChange }}</div>
-			<div id="copyright"><small>{{ .Site.Copyright }}</small></div>
-		</footer>
-	</body>
+		<head>
+				<meta charset="utf-8">
+				<meta name="viewport" content="width=device-width, initial-scale=1">
+				<title>{{ .Site.Title }}</title>
+				<link href="https://fonts.googleapis.com/css?family=Inconsolata" rel="stylesheet">
+				<link href="{{ .Site.BaseURL }}/css/emacsy.css" rel="stylesheet">
+				<link href="{{ .Site.BaseURL }}/css/syntax_highlight.css" rel="stylesheet">
+				{{ template "_internal/opengraph.html" . }}
+				{{ template "_internal/twitter_cards.html" . }}
+				{{ template "_internal/google_analytics_async.html" . }}
+		</head>
+		<body>
+				<h1><a href="{{ .Site.BaseURL }}">{{ .Site.Title }}</a><span id="blinkCursor">&#x25AE;</span></h1>
+				<hr id="titleHolizon">
+				<div id="articleContainer">
+						<nav class="prevnext" style="display: table; width: 100%">
+								{{ with .Parent.Pages.Prev . }}
+								<span style="display: table-cell; text-align: left;">
+										<a href="{{ .RelPermalink }}"><< {{ substr .Title 0 35 }}…</a>
+								</span>
+								{{ end }}
+								{{ with .Parent.Pages.Next . }}
+								<span style="display: table-cell; text-align: right;">
+										<a href="{{ .RelPermalink }}">{{ substr .Title 0 35 }}… >></a>
+								</span>
+								{{ end }}
+						</nav>
+						<header>
+								<span id="articleHeader">
+										<h2>
+												<span id="articleTitle">
+														{{ .Title }}
+												</span>
+												<time id="articleDate" datetime="{{ .Date }}">
+														<small>{{ .Date.Format "2006" }}-{{ .Date.Format "Jan" }}-{{ .Date.Format "02" }}</small>
+												</time>
+										</h2>
+								</span>
+						</header>
+						<article>
+								<div id="contentContainer">{{ .Content }}</div>
+						</article>
+						<nav class="prevnext" style="display: table; width: 100%">
+								{{ with .Parent.Pages.Prev . }}
+								<span class="prev-page far fa-arrow-alt-circle-left" style="display: table-cell; text-align: left;">
+										<a href="{{ .RelPermalink }}"><< {{ substr .Title 0 35 }}...</a>
+								</span>
+								{{ end }}
+								{{ with .Parent.Pages.Next . }}
+								<span class="prev-page far fa-arrow-alt-circle-left" style="display: table-cell; text-align: right;">
+										<a href="{{ .RelPermalink }}">{{ substr .Title 0 35 }}... >></a>
+								</span>
+								{{ end }}
+						</nav>
+				</div>
+				<hr id="footerHolizon">
+				<footer>
+						<div id="lastupdate">lastupdate: {{ .Site.LastChange }}</div>
+						<div id="copyright"><small>{{ .Site.Copyright }}</small></div>
+				</footer>
+		</body>
 </html>
