@@ -156,6 +156,7 @@ div.highlight > pre {
 	border: solid;
 	border-width: thin;
 	border-color: darkgreen;
+	padding-left: 1em;
 }
 
 @import url('https://fonts.googleapis.com/css?family=Source+Code+Pro&display=swap');
