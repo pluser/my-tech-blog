@@ -1,0 +1,90 @@
+#+title: Windows on QEMU/KVM のディスプレイをLinuxホストにパススルーする -Looking Glass-
+#+date: 2021-08-21T07:20:20Z
+#+summary: GPUパススルーしたWindowsゲストの画面をLinuxホストで見るアプリケーション Looking Glass の紹介
+** Windowsゲストの画面をLinuxホストで見たい
+
+Linuxデスクトップ上でWindowsを動かしています。Windowsには高性能なGPUサポートが必要なため、Linuxホストとは別にGPUを用意してPCIパススルーしています。
+ここで問題になるのは、Windows側のGPUはもちろんLinux側から離れてしまっているため、Linux側からWindows側の画面を見ることができません。
+
+どうしてもLinux側でWindows画面を見たかったので、キャプチャボードを使ってGPUのディスプレイ出力を取り込むという（見た目間抜けな）構成にしていました。しかしこの方法はキャプチャボードの性能により画質や性能に悪影響があり、良い解決策とは言えませんでした。
+
+** Looking Glass
+
+[[file:looking-glass-client.png]]
+
+[[https://looking-glass.io][Looking Glass]] はそうした状況を解決してくれるアプリケーションです。このアプリケーションを使うと、Windowsの画面をLinux上で見ることができるようになります。しかも非圧縮で超低遅延。その仕組みは次のようになっています。
+
+まず、Windows側に特殊なドライバとプログラム（サービス）を導入します。プログラムは画面キャプチャのためのWinAPIを使って画面をキャプチャし、ドライバに渡します。ドライバはQEMUが確保したメモリ領域にプログラムから受けとった画面のデータを（非圧縮で）書き込みます。最後に、Linux側のクライアントプログラムで、QEMUが確保したメモリに直接アクセスし、画面データを受け取って表示します。このクライアントプログラムはSPICEプロトコルに対応しているので、マウスやキーボード入力をQEMUに投げることもできます。
+
+残念ながら音声の低遅延パススルーには対応していません。要望はあったようなのですが、映像の低遅延化に悪影響が出ると困る、ということみたいです。
+
+** 導入
+*** QEMU設定
+
+まず最初にQEMUの設定をして、WindowsゲストからLinuxホストへ画面データを受け渡すためのメモリを確保します。
+私はlibvirtを使っているので、
+
+#+BEGIN_SRC xml
+<shmem name='looking-glass'>
+  <model type='ivshmem-plain'/>
+  <size unit='M'>128</size>
+</shmem>
+#+END_SRC
+
+というのを仮想マシン設定ファイルのdeviceセクションに入れておきます。確保するメモリ量は ~width x height x 4 x 2 = total bytes~ で計算できるみたいです。うちは4Kモニタなので、いろいろ余裕をみて128MBを確保しています。
+
+*** Windowsに導入
+
+公式サイトではWindowsゲスト向けのバイナリインストーラが配布されているので、これを導入するのが良いと思います。
+特筆すべきことは何もありません。ポチポチすればサービスとプログラムの両方が導入されます。
+
+*** Linuxクライアントの導入
+
+Linuxクライアントプログラムはパッケージ化されていませんし、主要なディストリビューションでも扱っていません。Windows側とバージョンを合わせる必要があるので、自前でビルドしてしまうのが良いでしょう。
+公式サイトからソースコードをダウンロードしてビルドします。
+
+#+BEGIN_SRC sh
+curl -O looking-glass.tar.gz 'https://looking-glass.io/ci/host/source?id=stable'
+tar xf looking-glass.tar.gz
+cd looking-glass
+mkdir client/build
+cd client/build
+cmake ..
+make
+#+END_SRC
+
+こんなかんじでしょうか。CMakeが必要そうです。Linuxデスクトップの環境に応じて ~-DENABLE_WAYLAND~ や ~-DENABLE_X11~ といったオプションを cmake に渡す必要があるかもしれません。
+
+ビルドに成功すれば ~client/build~ ディレクトリに ~looking-glass-client~ という実行可能ファイルが生成されているはずです。
+
+*** パーミッションの設定
+
+多くの場合、Windowsゲストを実行しているQEMUはユーザー権限ではなく、他の誰かの権限で動作していると思います。QEMUが作るメモリマップドなファイルのパーミッションを正しく設定しておかねばなりません。
+いくつかの解決策がありますが、私の場合は都度拡張パーミッションを書くことにしました。
+~sudo setfacl -m u:<USERNAME>:rw /dev/shm/looking-glass~
+などとして、仮想マシンを起動する度にファイルにパーミッションを与えています。
+
+あとは ~looking-glass-client~ を起動するだけです。私の場合はスケーリング処理をニアレストネイバー法からバイリニア法に変更したかったので ~looking-glass-client egl:scale=2~ として起動しています。
+
+*** おまけ：OBSプラグインの導入
+
+Looking Glass には映像配信・録画アプリケーションの [[https://obsproject.com][OBS Studio]] 用のプラグインも同梱されています。
+
+#+BEGIN_SRC sh
+mkdir obs/build
+cd obs/build
+cmake ..
+make
+mkdir -p ~/.config/obs-studio/plugins/looking-glass-obs/bin/64bit
+cp liblooking-glass-obs.so ~/.config/obs-studio/plugins/looking-glass-obs/bin/64bit/liblooking-glass-obs.so
+#+END_SRC
+
+などとすれば導入できます。OBS のプラグインはそんな所に置くんですね。
+
+** 使用感
+
+非常に低遅延で、GPUからの出力をそのまま表示しているモニタと遜色ない遅延です。リフレッシュレートも余裕で60FPS出ます。可能な限りメモリコピーが抑えられているせいか負荷も低く、ゲームを含めた用途に十分に実用的です。
+マウスやキーボードのグラブも整っていて、Linuxデスクトップとの間でシームレスに使うことができます。なおきちんと設定するとクリップボードとかも共有できる模様。
+
+** 参考文献
+- [[https://looking-glass.io/docs/stable/install/][Installation - Looking Glass B4 documentation]]
