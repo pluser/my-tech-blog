@@ -3,6 +3,7 @@ title: "Game Review: CONTROL"
 date: 2021-02-18T03:16:14+09:00
 type: posts
 draft: false
+summary: "久しぶりにゲームをクリアしたので CONTROL の感想"
 ---
 
 すごく久しぶりにシングルプレイのゲームをクリアしました。Remedy Entertainment / 505 Games から出ている CONTROL というホラーシューティングゲームです。
