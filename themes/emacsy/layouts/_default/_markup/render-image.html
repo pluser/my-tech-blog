@@ -1,0 +1,15 @@
+{{ $image := .Page.Resources.GetMatch (printf "%s" (.Destination)) }}
+{{ if ne $image.MediaType.SubType "svg" }}
+{{ $small := $image.Resize "480x webp" }}
+{{ $medium := $image.Resize "768x webp" }}
+{{ $large := $image.Resize "1024x webp" }}
+{{ $xlarge := $image.Resize "1920x webp" }}
+{{ $alt := .PlainText | safeHTML }}
+<picture>
+  <source media="(max-width: 480px)" srcset="{{ $small.RelPermalink }} 480w">
+  <source media="(max-width: 768px)" srcset="{{ $medium.RelPermalink }} 768w">
+  <source media="(max-width: 1024px)" srcset="{{ $large.RelPermalink }} 1024w">
+  <source media="(max-width: 1920px)" srcset="{{ $xlarge.RelPermalink }} 1920w">
+  <img src="{{ $image.RelPermalink }}" alt="{{ $alt }}">
+</picture>
+{{ end }}
