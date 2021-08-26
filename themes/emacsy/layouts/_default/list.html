@@ -4,7 +4,6 @@
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<title>{{ .Site.Title }}</title>
-		<link href="https://fonts.googleapis.com/css?family=Inconsolata" rel="stylesheet">
 		<link href="{{ .Site.BaseURL }}/css/emacsy.css" rel="stylesheet">
 		{{ with .OutputFormats.Get "Atom" -}}
 		{{ printf `<link rel="%s" type="%s" href="%s" title="%s" />` .Rel .MediaType.Type .Permalink $.Site.Title | safeHTML }}
