@@ -6,6 +6,9 @@
 				<title>{{ .Site.Title }}</title>
 				<link href="{{ .Site.BaseURL }}/css/emacsy.css" rel="stylesheet">
 				<link href="{{ .Site.BaseURL }}/css/syntax_highlight.css" rel="stylesheet">
+				{{ if .Params.mathjax }}
+				{{ partial "mathjax.html" . }}
+				{{ end }}
 				{{ template "_internal/opengraph.html" . }}
 				{{ template "_internal/twitter_cards.html" . }}
 				{{ template "_internal/google_analytics_async.html" . }}
