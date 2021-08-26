@@ -4,9 +4,8 @@ date: 2020-11-26T00:48:15+09:00
 type: posts
 draft: false
 summary: 卒論とか修論用のコピペで使えるLaTeXチートシートです
+mathjax: true
 ---
-
-# LaTeXチートシート
 
 卒論とか、修論とか、そういうの向けのLaTeXチートシートを書いていこうと思います。
 とりあえず御託はいいから早急にTeX文書を書かなきゃいけないんだ！っていう人向けのなので、コピペですぐ使えるようにまとめてみます。
@@ -84,3 +83,11 @@ E = mc^2
 複数行にまたがる数式などの詳しい使い方はマニュアルか、
 https://tm23forest.com/contents/latex-amsmath-guide-with-svg-outputexample
 を参照すると良いです。
+
+### 行列の転置
+いろいろな（場当たり的）対応がされている模様。意味論的にはメチャクチャ…… まあ数学の書式自体がメチャクチャなのでしかたがないのかも。
+個人的には `A^\top` を使って \\( A^\top \\) としています。詳しくは以下を参照。
+
+- [LaTeXでの転置行列の表記 - Alice in the Machine - Blog](https://blog.browniealice.net/post/latex_transpose/)
+- [math mode - What is the best symbol for vector/matrix transpose? - TeX - LaTeX Stack Exchange](https://tex.stackexchange.com/questions/30619/what-is-the-best-symbol-for-vector-matrix-transpose)
+- [TeXで転置行列を美しく出力する方法 | 理系のための備忘録](https://science-log.com/%E6%95%B0%E5%AD%A6/tex%E3%81%A7%E8%BB%A2%E7%BD%AE%E8%A1%8C%E5%88%97%E3%82%92%E7%BE%8E%E3%81%97%E3%81%8F%E5%87%BA%E5%8A%9B%E3%81%99%E3%82%8B%E6%96%B9%E6%B3%95/)
