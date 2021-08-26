@@ -4,6 +4,7 @@ theme = "emacsy"
 DefaultContentLanguage = "ja"
 hasCJKLanguage = true
 googleAnalytics = "UA-582650-9"
+enableGitInfo = true
 
 [markup]
 [markup.highlight]
