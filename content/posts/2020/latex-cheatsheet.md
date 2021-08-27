@@ -91,3 +91,32 @@ https://tm23forest.com/contents/latex-amsmath-guide-with-svg-outputexample
 - [LaTeXでの転置行列の表記 - Alice in the Machine - Blog](https://blog.browniealice.net/post/latex_transpose/)
 - [math mode - What is the best symbol for vector/matrix transpose? - TeX - LaTeX Stack Exchange](https://tex.stackexchange.com/questions/30619/what-is-the-best-symbol-for-vector-matrix-transpose)
 - [TeXで転置行列を美しく出力する方法 | 理系のための備忘録](https://science-log.com/%E6%95%B0%E5%AD%A6/tex%E3%81%A7%E8%BB%A2%E7%BD%AE%E8%A1%8C%E5%88%97%E3%82%92%E7%BE%8E%E3%81%97%E3%81%8F%E5%87%BA%E5%8A%9B%E3%81%99%E3%82%8B%E6%96%B9%E6%B3%95/)
+
+## 図を入れたい
+
+### 数式入りの凝った図を作りたい
+無料の範疇では [Inkscape](https://inkscape.org) を使うのがおすすめです。数式の入れ方は下記を参照。
+
+- [InkscapeでLaTeX数式を使った図の作成 | tm23forest.com](https://tm23forest.com/contents/inkscape-pdflatex-equation-figure)
+
+### SVG画像をそのまま貼りたい
+プリアンブルに
+
+```LaTeX
+\usepackage{svg}
+\svgsetup{inkscapelatex=false}
+```
+
+と入れておいて、
+
+```LaTeX
+\begin{figure}
+  \centering
+  \includesvg[width=.7\linewidth]{figures/hogehoge.svg}
+  \caption{hogehoge}
+  \label{fig:hogehoge}
+\end{figure}
+```
+
+などとして貼る。オプションなどは `\includegraphics` とほぼ同様。
+プリアンブルの `\svgsetup{inkscapelatex=false}` は文字と図の位置関係がズレてしまうのを防ぐための設定。テキスト情報を保持したSVG画像では、特にスケーリング時に、テキストの位置関係を示すアンカーの設定不備やフォントの実質的大きさの違いなどが原因でテキストと図がズレてしまうことがある。この設定により、テキストのレンダリングがTeX側ではなく、inkscape側で行われるようになる。
