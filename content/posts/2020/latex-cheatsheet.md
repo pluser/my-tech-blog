@@ -120,3 +120,53 @@ https://tm23forest.com/contents/latex-amsmath-guide-with-svg-outputexample
 
 などとして貼る。オプションなどは `\includegraphics` とほぼ同様。
 プリアンブルの `\svgsetup{inkscapelatex=false}` は文字と図の位置関係がズレてしまうのを防ぐための設定。テキスト情報を保持したSVG画像では、特にスケーリング時に、テキストの位置関係を示すアンカーの設定不備やフォントの実質的大きさの違いなどが原因でテキストと図がズレてしまうことがある。この設定により、テキストのレンダリングがTeX側ではなく、inkscape側で行われるようになる。
+
+### 画像・図の上にTikzで何か描きたい
+例はsvgの場合。ピクセル画像の時には `\includesvg` ではなく `\includegraphics` にすべし。
+`scope` を使って画像の上にレイヤーを作り大きさを画像と一致させることで、スケールした時にTikzで描いたものと画像との座標がズレないようにしている。
+なお `scope` のオプションのx,yでは座標の基底ベクトルを指定している。
+
+```LaTeX
+\begin{tikzpicture}
+  \node[anchor=south west] (image) at (0,0) {
+    \includesvg[height=.6\textheight]{figure/experiment_network.svg}};
+  \begin{scope}[x={(image.south east)},y={(image.north west)}]
+    \draw[rounded corners, blue, thick] (0,.06) rectangle ++(.44,.42);
+  \end{scope}
+\end{tikzpicture}
+```
+
+## Beamer編
+プレゼンテーション用のPDFを出力できるBeamerを使うと、パワーポイントなどと違い、コードで記述できる。バージョン管理などとも相性が良いし、ブラックボックスが少なく、使いまわしも効く。
+
+### 右下にスライド番号を表示したい
+```LaTeX
+\setbeamertemplate{footline}[frame number]
+```
+
+プリアンブルに挿入。これで解決だ。
+
+### 数式のフォントが変
+```LaTeX
+\usefonttheme[onlymath]{serif}
+```
+
+をプリアンブルに入れよう。数式のみが見慣れたCMフォントになる。
+
+### 日本語が豆腐になる
+Beamerにはマルチバイト文字を扱うことを事前に知らせなければいけない。これをプリアンブルに挿入。
+
+```LaTeX
+\documentclass[unicode]{beamer}
+```
+
+### 参考文献が大きすぎて入らない
+お手軽にはスライド自体を縮めてしまうのが良い。余白が大きくなるのではなく、きちんと右端まで文字が来るので心配は無用だ。
+
+```LaTeX
+\begin{frame}[shrink=50]{参考文献}
+文献いろいろ
+\end{frame}
+```
+
+などとしてフレームごと縮小してしまおう。
