@@ -100,6 +100,7 @@ https://tm23forest.com/contents/latex-amsmath-guide-with-svg-outputexample
 - [InkscapeでLaTeX数式を使った図の作成 | tm23forest.com](https://tm23forest.com/contents/inkscape-pdflatex-equation-figure)
 
 ### SVG画像をそのまま貼りたい
+まず [Inkscape](https://inkscape.org) が導入され、パスが通っていることが前提。
 プリアンブルに
 
 ```LaTeX
@@ -121,7 +122,7 @@ https://tm23forest.com/contents/latex-amsmath-guide-with-svg-outputexample
 などとして貼る。オプションなどは `\includegraphics` とほぼ同様。
 プリアンブルの `\svgsetup{inkscapelatex=false}` は文字と図の位置関係がズレてしまうのを防ぐための設定。テキスト情報を保持したSVG画像では、特にスケーリング時に、テキストの位置関係を示すアンカーの設定不備やフォントの実質的大きさの違いなどが原因でテキストと図がズレてしまうことがある。この設定により、テキストのレンダリングがTeX側ではなく、inkscape側で行われるようになる。
 
-### 画像・図の上にTikzで何か描きたい
+### 画像・図の上にTikZで何か描きたい
 例はsvgの場合。ピクセル画像の時には `\includesvg` ではなく `\includegraphics` にすべし。
 `scope` を使って画像の上にレイヤーを作り大きさを画像と一致させることで、スケールした時にTikzで描いたものと画像との座標がズレないようにしている。
 なお `scope` のオプションのx,yでは座標の基底ベクトルを指定している。
