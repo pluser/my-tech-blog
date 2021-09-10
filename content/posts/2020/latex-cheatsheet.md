@@ -137,6 +137,36 @@ https://tm23forest.com/contents/latex-amsmath-guide-with-svg-outputexample
 \end{tikzpicture}
 ```
 
+## BibLaTeX編
+参考文献とかで引用する時の方法thebibliography環境を使う方法など、いくつかある。よっぽど小規模な文章を書くとき以外はBibLaTeXが現時点で一番使いやすく、引用データベースの使いまわしもできるので、これを使おう。
+
+```LaTeX
+\usepackage{biblatex}
+\addbibresource{main.bib}
+\begin{document}
+  \printbibliography[heading=none]
+\end{document}
+```
+
+`heading=none` オプションでセクションタイトルを付けないようにする。Beamerとかだとおかしくなってしまうため。
+
+### 脚注で引用したい
+引用した文献の書誌情報を脚注に書けると便利だったりする。
+基本的に `\cite{hogehoge}` の代わりに `\footcite{hogehoge}` を使えばよい。
+
+### 脚注のスタイルをいじりたい
+- [biblatex の標準スタイルの解説 - Qiita](https://qiita.com/shiro_takeda/items/81f2c50c28eccbec08be)
+- [biblatex のオプションの解説 - Qiita](https://qiita.com/shiro_takeda/items/fac1351495f32c224a28)
+
+を見るとよい。
+なお、脚注に著者名＋タイトル＋年号を表示するには次のようにする。`citestyle=authortitle` で著者名とタイトルを表示することにしておいてから後ろに年号を付加する。
+
+```LaTeX
+\usepackage[citestyle=authortitle]{biblatex}
+\usepackage{xpatch}
+\xapptobibmacro{cite}{\setunit{\nametitledelim}\printfield{year}}{}{}
+```
+
 ## Beamer編
 プレゼンテーション用のPDFを出力できるBeamerを使うと、パワーポイントなどと違い、コードで記述できる。バージョン管理などとも相性が良いし、ブラックボックスが少なく、使いまわしも効く。
 
@@ -171,3 +201,8 @@ Beamerにはマルチバイト文字を扱うことを事前に知らせなけ�
 ```
 
 などとしてフレームごと縮小してしまおう。
+
+### 日本語を明朝体ではなくゴシック体にする
+```LaTeX
+\renewcommand{\kanjifamilydefault}{\gtdefault}
+```
