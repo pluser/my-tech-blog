@@ -140,6 +140,8 @@ https://tm23forest.com/contents/latex-amsmath-guide-with-svg-outputexample
 ## BibLaTeX編
 参考文献とかで引用する時の方法thebibliography環境を使う方法など、いくつかある。よっぽど小規模な文章を書くとき以外はBibLaTeXが現時点で一番使いやすく、引用データベースの使いまわしもできるので、これを使おう。
 
+[BibLaTeX+Biberの始め方 | tm23forest.com](https://tm23forest.com/contents/biblatex-biber-begin) を見るとざっと使い方が分かる。
+
 ```LaTeX
 \usepackage{biblatex}
 \addbibresource{main.bib}
